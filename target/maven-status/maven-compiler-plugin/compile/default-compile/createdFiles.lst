@@ -1,0 +1,5 @@
+com/example/ProductService/ProductServiceApplication.class
+com/example/ProductService/controller/ProductController.class
+com/example/ProductService/exception/ResourceNotFoundException.class
+com/example/ProductService/repository/ProductRepository.class
+com/example/ProductService/model/Product.class
