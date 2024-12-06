@@ -1,20 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: com.example.ProductService.controller.ProductControllerTest
 -------------------------------------------------------------------------------
-Tests run: 4, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 1.677 s <<< FAILURE! -- in com.example.ProductService.controller.ProductControllerTest
-com.example.ProductService.controller.ProductControllerTest.testCreateProduct -- Time elapsed: 0.100 s <<< FAILURE!
-java.lang.AssertionError: No value at JSON path "$.id"
-	at org.springframework.test.util.JsonPathExpectationsHelper.evaluateJsonPath(JsonPathExpectationsHelper.java:351)
-	at org.springframework.test.util.JsonPathExpectationsHelper.assertValue(JsonPathExpectationsHelper.java:148)
-	at org.springframework.test.web.servlet.result.JsonPathResultMatchers.lambda$value$2(JsonPathResultMatchers.java:112)
-	at org.springframework.test.web.servlet.MockMvc$1.andExpect(MockMvc.java:214)
-	at com.example.ProductService.controller.ProductControllerTest.testCreateProduct(ProductControllerTest.java:56)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
-	at java.base/java.util.ArrayList.forEach(ArrayList.java:1597)
-	at java.base/java.util.ArrayList.forEach(ArrayList.java:1597)
-Caused by: java.lang.IllegalArgumentException: json can not be null or empty
-	at com.jayway.jsonpath.internal.Utils.notEmpty(Utils.java:401)
-	at com.jayway.jsonpath.JsonPath.read(JsonPath.java:390)
-	at org.springframework.test.util.JsonPathExpectationsHelper.evaluateJsonPath(JsonPathExpectationsHelper.java:348)
-	... 7 more
-
+Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.496 s -- in com.example.ProductService.controller.ProductControllerTest

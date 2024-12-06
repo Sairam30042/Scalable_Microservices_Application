@@ -1,6 +1,5 @@
 package com.example.ProductService.controller;
 
-import com.example.ProductService.controller.ProductController;
 import com.example.ProductService.model.Product;
 import com.example.ProductService.repository.ProductRepository;
 import org.junit.jupiter.api.Test;
@@ -10,14 +9,15 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
-import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.mockito.ArgumentMatchers.any;
 
-@WebMvcTest(ProductController.class)
+@WebMvcTest
 public class ProductControllerTest {
 
     @Autowired
@@ -29,7 +29,7 @@ public class ProductControllerTest {
     @Test
     public void testGetAllProducts() throws Exception {
         when(productRepository.findAll()).thenReturn(
-            Arrays.asList(
+            List.of(
                 new Product(1L, "Test Product 1", 50.0),
                 new Product(2L, "Test Product 2", 75.0)
             )
@@ -43,21 +43,20 @@ public class ProductControllerTest {
     }
 
     @Test
-public void testCreateProduct() throws Exception {
-    Product product = new Product(null, "New Product", 99.99);
-    Product savedProduct = new Product(1L, "New Product", 99.99);
+    public void testCreateProduct() throws Exception {
+        Product product = new Product(null, "New Product", 99.99);
+        Product savedProduct = new Product(1L, "New Product", 99.99);
 
-    when(productRepository.save(product)).thenReturn(savedProduct);
+        when(productRepository.save(any(Product.class))).thenReturn(savedProduct);
 
-    mockMvc.perform(post("/products")
-            .contentType(MediaType.APPLICATION_JSON)
-            .content("{\"name\": \"New Product\", \"price\": 99.99}"))
-            .andExpect(status().isOk())
-            .andExpect(jsonPath("$.id").value(1))
-            .andExpect(jsonPath("$.name").value("New Product"))
-            .andExpect(jsonPath("$.price").value(99.99));
-}
-
+        mockMvc.perform(post("/products")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("{\"name\": \"New Product\", \"price\": 99.99}"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.id").value(1))
+                .andExpect(jsonPath("$.name").value("New Product"))
+                .andExpect(jsonPath("$.price").value(99.99));
+    }
 
     @Test
     public void testUpdateProduct() throws Exception {
@@ -65,7 +64,7 @@ public void testCreateProduct() throws Exception {
         Product updatedProduct = new Product(1L, "Updated Product", 75.0);
 
         when(productRepository.findById(1L)).thenReturn(Optional.of(existingProduct));
-        when(productRepository.save(existingProduct)).thenReturn(updatedProduct);
+        when(productRepository.save(any(Product.class))).thenReturn(updatedProduct);
 
         mockMvc.perform(put("/products/1")
                 .contentType(MediaType.APPLICATION_JSON)
